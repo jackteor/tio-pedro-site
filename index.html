@@ -1,0 +1,783 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tio Pedro – Pulido de Mármol en Marbella</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: #111827;
+      padding: 32px 16px;
+      /* общий фон – тёмный зал с отблесками */
+      background-color: #020617;
+      background-image:
+        radial-gradient(circle at 0 0, #4b5563 0, transparent 55%),
+        radial-gradient(circle at 100% 100%, #d4a15a33 0, transparent 60%);
+    }
+
+    /* сетка из мраморных плиток */
+    .page {
+      max-width: 1180px;
+      margin: 0 auto;
+      border-radius: 28px;
+      padding: 18px;
+      background-image:
+        linear-gradient(#e5ded1 1px, transparent 1px),
+        linear-gradient(90deg, #e5ded1 1px, transparent 1px),
+        radial-gradient(circle at 0 0, #fdf7ed 0, #e8ddce 42%, #e0d3c2 80%);
+      background-size: 32px 32px, 32px 32px, cover;
+      background-position: 0 0, 0 0, center;
+      box-shadow:
+        0 30px 80px rgba(0, 0, 0, 0.65),
+        0 0 0 1px rgba(15, 23, 42, 0.65);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .page::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 0 0, rgba(255, 255, 255, 0.35), transparent 55%);
+      pointer-events: none;
+      mix-blend-mode: screen;
+    }
+
+    .page-inner {
+      position: relative;
+      border-radius: 22px;
+      overflow: hidden;
+      background: linear-gradient(135deg, rgba(15, 23, 42, 0.88), rgba(15, 23, 42, 0.94));
+      color: #e5e7eb;
+    }
+
+    header.hero {
+      position: relative;
+      padding: 24px 26px 70px;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 16px;
+      background-image:
+        linear-gradient(120deg, rgba(15, 23, 42, 0.96), rgba(15, 23, 42, 0.82)),
+        url("img/gold-marble-bg.jpg");
+      background-size: cover;
+      background-position: center;
+      color: #f9fafb;
+    }
+
+    .logo {
+      font-size: 32px;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .logo span {
+      color: #facc6b;
+    }
+
+    .hero-subtitle {
+      margin-top: 6px;
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 0.22em;
+      color: #e5e7eb;
+      opacity: 0.9;
+    }
+
+    .tagline {
+      font-size: 13px;
+      text-align: right;
+      color: #e5e7eb;
+      line-height: 1.6;
+    }
+
+    .tagline strong {
+      color: #facc6b;
+      font-weight: 600;
+    }
+
+    .badge {
+      position: absolute;
+      left: 26px;
+      bottom: 18px;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 4px 10px;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.86);
+      border: 1px solid rgba(250, 204, 21, 0.45);
+      font-size: 11px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: #facc6b;
+    }
+
+    .badge-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 999px;
+      background: #22c55e;
+      box-shadow: 0 0 0 4px rgba(34, 197, 94, 0.25);
+    }
+
+    .two-columns-wrapper {
+      padding: 0 20px 18px;
+      margin-top: -36px;
+    }
+
+    .two-columns {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+    }
+
+    .column {
+      padding: 14px 14px 12px;
+      border-radius: 20px;
+      background: radial-gradient(circle at 0 0, rgba(148, 163, 184, 0.24), transparent 55%),
+        rgba(15, 23, 42, 0.96);
+      border: 1px solid rgba(148, 163, 184, 0.45);
+      backdrop-filter: blur(16px);
+    }
+
+    .column h2 {
+      margin-top: 0;
+      font-size: 18px;
+      margin-bottom: 8px;
+      color: #f9fafb;
+    }
+
+    .lang-label {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      color: #9ca3af;
+      margin-bottom: 4px;
+    }
+
+    .intro {
+      font-size: 14px;
+      line-height: 1.7;
+      color: #e5e7eb;
+      margin-bottom: 14px;
+    }
+
+    .intro strong {
+      color: #facc6b;
+      font-weight: 600;
+    }
+
+    .services-title {
+      font-size: 12px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      color: #9ca3af;
+      margin: 14px 0 10px;
+    }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 12px;
+    }
+
+    /* плитка-услуга */
+    .service-card {
+      border-radius: 16px;
+      background-image:
+        linear-gradient(#e0d4c4 1px, transparent 1px),
+        linear-gradient(90deg, #e0d4c4 1px, transparent 1px),
+        radial-gradient(circle at 0 0, #fdf7ed 0, #e8ddce 45%, #dacbb7 85%);
+      background-size: 28px 28px, 28px 28px, cover;
+      background-position: 0 0, 0 0, center;
+      border: 1px solid rgba(148, 163, 184, 0.8);
+      padding: 10px 11px 10px;
+      color: #1f2933;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 12px 25px rgba(15, 23, 42, 0.55);
+    }
+
+    .service-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(140deg, rgba(255, 255, 255, 0.52), transparent 45%);
+      mix-blend-mode: screen;
+      opacity: 0.7;
+      pointer-events: none;
+    }
+
+    .service-inner {
+      position: relative;
+      z-index: 1;
+    }
+
+    .service-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 2px 9px 3px;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.85);
+      color: #facc6b;
+      font-size: 10px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+
+    .service-pill-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 999px;
+      background: #facc6b;
+    }
+
+    .service-text-title {
+      font-size: 13px;
+      font-weight: 700;
+      margin-bottom: 4px;
+      color: #111827;
+    }
+
+    .service-text-desc {
+      font-size: 12px;
+      line-height: 1.6;
+      color: #374151;
+      margin-bottom: 6px;
+    }
+
+    .service-text-desc strong {
+      color: #b45309;
+      font-weight: 600;
+    }
+
+    .service-photo {
+      width: 100%;
+      border-radius: 10px;
+      display: block;
+      margin-top: 4px;
+      border: 1px solid rgba(148, 163, 184, 0.85);
+      box-shadow: 0 10px 18px rgba(15, 23, 42, 0.45);
+    }
+
+    /* галерея */
+    .gallery {
+      margin-top: 18px;
+      padding: 14px 14px 8px;
+      border-radius: 20px;
+      background: radial-gradient(circle at 100% 0, rgba(56, 189, 248, 0.16), transparent 55%),
+        rgba(15, 23, 42, 0.96);
+      border: 1px solid rgba(148, 163, 184, 0.55);
+    }
+
+    .gallery-title {
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      color: #9ca3af;
+      margin: 0 0 10px;
+    }
+
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .gallery-item {
+      border-radius: 14px;
+      overflow: hidden;
+      border: 1px solid rgba(148, 163, 184, 0.65);
+      background: #020617;
+    }
+
+    .gallery-photo-wrapper {
+      position: relative;
+    }
+
+    .gallery-photo {
+      width: 100%;
+      display: block;
+      aspect-ratio: 4 / 3;
+      object-fit: cover;
+    }
+
+    .gallery-photo-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(15, 23, 42, 0.75), transparent 60%);
+      pointer-events: none;
+    }
+
+    .gallery-caption {
+      font-size: 11px;
+      padding: 6px 8px 8px;
+      color: #e5e7eb;
+    }
+
+    footer {
+      margin-top: 8px;
+      padding: 10px 22px 14px;
+      border-top: 1px solid rgba(51, 65, 85, 0.9);
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+      align-items: center;
+      font-size: 13px;
+      color: #e5e7eb;
+      background: linear-gradient(to right, rgba(15, 23, 42, 0.98), rgba(15, 23, 42, 0.95));
+    }
+
+    .contacts {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px 18px;
+      align-items: center;
+    }
+
+    .contact-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      white-space: nowrap;
+    }
+
+    .contact-item span.icon {
+      font-size: 14px;
+    }
+
+    .contact-item a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .contact-item a:hover {
+      text-decoration: underline;
+    }
+
+    .area-label {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      color: #9ca3af;
+    }
+
+    @media (max-width: 900px) {
+      .two-columns {
+        grid-template-columns: 1fr;
+      }
+
+      .tagline {
+        text-align: left;
+      }
+
+      header.hero {
+        flex-direction: column;
+        align-items: flex-start;
+        padding-bottom: 60px;
+      }
+
+      .badge {
+        position: static;
+        margin-top: 16px;
+      }
+
+      .two-columns-wrapper {
+        margin-top: -30px;
+      }
+
+      .gallery-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    @media (max-width: 640px) {
+      body {
+        padding: 20px 10px;
+      }
+
+      .page {
+        border-radius: 18px;
+      }
+
+      header.hero {
+        padding: 18px 16px 52px;
+      }
+
+      .two-columns-wrapper {
+        padding: 0 12px 16px;
+      }
+
+      .column {
+        padding: 13px 10px 10px;
+      }
+
+      .gallery-grid {
+        grid-template-columns: 1fr;
+      }
+
+      footer {
+        padding-inline: 16px;
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .contacts {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <div class="page-inner">
+      <header class="hero">
+        <div>
+          <div class="logo"><span>Tio</span> Pedro</div>
+          <div class="hero-subtitle">Marble & stone floor care – Costa del Sol</div>
+        </div>
+        <div class="tagline">
+          <strong>Pulido premium</strong> de suelos de mármol y granito<br />
+          para viviendas, comunidades y hoteles en Marbella y Fuengirola.
+        </div>
+        <div class="badge">
+          <span class="badge-dot"></span>
+          <span>Desde Marbella · Servicio local</span>
+        </div>
+      </header>
+
+      <div class="two-columns-wrapper">
+        <div class="two-columns">
+          <!-- Spanish side -->
+          <section class="column">
+            <div class="lang-label">Español</div>
+            <h2>Pulido y abrillantado de mármol en Marbella</h2>
+            <p class="intro">
+              Especialistas en <strong>pulido, abrillantado y cristalizado de suelos de mármol y granito</strong>
+              en Marbella, Fuengirola y toda la Costa del Sol. Trabajamos en viviendas, comunidades,
+              hoteles, restaurantes y locales comerciales.
+            </p>
+
+            <div class="services-title">Servicios principales (SEO)</div>
+            <div class="services-grid">
+              <article class="service-card">
+                <div class="service-inner">
+                  <div class="service-pill"><span class="service-pill-dot"></span> mármol · Marbella</div>
+                  <div class="service-text-title">1) pulido de mármol Marbella</div>
+                  <div class="service-text-desc">
+                    Pulido profesional de suelos de mármol en viviendas y comunidades de Marbella. Eliminamos
+                    arañazos, manchas y desgaste para recuperar el brillo original del mármol.
+                  </div>
+                  <img class="service-photo" src="img/marble-polishing-1.jpg" alt="Pulido de mármol en vivienda de lujo en Marbella" />
+                </div>
+              </article>
+
+              <article class="service-card">
+                <div class="service-inner">
+                  <div class="service-pill"><span class="service-pill-dot"></span> abrillantado</div>
+                  <div class="service-text-title">2) pulido y abrillantado de suelos Marbella</div>
+                  <div class="service-text-desc">
+                    Servicio completo de <strong>pulido y abrillantado</strong> de suelos de piedra natural.
+                    Ideal para comunidades, portales, garajes y locales comerciales en Marbella.
+                  </div>
+                  <img class="service-photo" src="img/marble-polishing-2.jpg" alt="Pulido y abrillantado de suelos en comunidad de vecinos" />
+                </div>
+              </article>
+
+              <article class="service-card">
+                <div class="service-inner">
+                  <div class="service-pill"><span class="service-pill-dot"></span> Fuengirola</div>
+                  <div class="service-text-title">3) empresa pulido mármol Fuengirola</div>
+                  <div class="service-text-desc">
+                    Empresa especializada en pulido de mármol en Fuengirola y alrededores. Ofrecemos visitas
+                    y presupuestos sin compromiso en toda la zona.
+                  </div>
+                  <img class="service-photo" src="img/marble-polishing-3.jpg" alt="Equipo de pulido de mármol en Fuengirola" />
+                </div>
+              </article>
+
+              <article class="service-card">
+                <div class="service-inner">
+                  <div class="service-pill"><span class="service-pill-dot"></span> Costa del Sol</div>
+                  <div class="service-text-title">4) pulir mármol Costa del Sol</div>
+                  <div class="service-text-desc">
+                    Pulimos y restauramos suelos de mármol en toda la Costa del Sol: Marbella, Fuengirola,
+                    Estepona, Benalmádena y alrededores.
+                  </div>
+                  <img class="service-photo" src="img/marble-polishing-4.jpg" alt="Pulido de suelos de mármol en la Costa del Sol" />
+                </div>
+              </article>
+
+              <article class="service-card">
+                <div class="service-inner">
+                  <div class="service-pill"><span class="service-pill-dot"></span> granito</div>
+                  <div class="service-text-title">5) abrillantado de granito Marbella</div>
+                  <div class="service-text-desc">
+                    Tratamientos específicos para suelos de granito: limpieza profunda, pulido y abrillantado
+                    duradero, con acabado antideslizante si es necesario.
+                  </div>
+                  <img class="service-photo" src="img/granite-polishing-1.jpg" alt="Abrillantado de suelo de granito en Marbella" />
+                </div>
+              </article>
+
+              <article class="service-card">
+                <div class="service-inner">
+                  <div class="service-pill"><span class="service-pill-dot"></span> suelos de mármol</div>
+                  <div class="service-text-title">6) pulido de suelos de mármol en Marbella</div>
+                  <div class="service-text-desc">
+                    Pulido de grandes superficies de mármol en hoteles, spas, tiendas y comunidades de vecinos.
+                    Trabajamos fuera del horario comercial si lo necesita.
+                  </div>
+                  <img class="service-photo" src="img/marble-hotel-lobby-1.jpg" alt="Lobby de hotel con suelo de mármol pulido" />
+                </div>
+              </article>
+
+              <article class="service-card">
+                <div class="service-inner">
+                  <div class="service-pill"><span class="service-pill-dot"></span> restauración</div>
+                  <div class="service-text-title">7) restauración de mármol y granito Fuengirola</div>
+                  <div class="service-text-desc">
+                    Recuperamos suelos antiguos de mármol y granito: nivelado, pulido, sellado de juntas y
+                    cristalizado final para un brillo espejo.
+                  </div>
+                  <img class="service-photo" src="img/marble-restoration-1.jpg" alt="Restauración de suelo de mármol antiguo" />
+                </div>
+              </article>
+
+              <article class="service-card">
+                <div class="service-inner">
+                  <div class="service-pill"><span class="service-pill-dot"></span> cerca de ti</div>
+                  <div class="service-text-title">8) pulidores de mármol cerca de Marbella</div>
+                  <div class="service-text-desc">
+                    Equipo local de pulidores de mármol <strong>cerca de Marbella</strong>. Respuesta rápida,
+                    servicio serio y resultados profesionales.
+                  </div>
+                  <img class="service-photo" src="img/marble-team-1.jpg" alt="Pulidores de mármol cerca de Marbella" />
+                </div>
+              </article>
+
+              <article class="service-card">
+                <div class="service-inner">
+                  <div class="service-pill"><span class="service-pill-dot"></span> cristalizado</div>
+                  <div class="service-text-title">9) cristalizado de mármol Marbella precios</div>
+                  <div class="service-text-desc">
+                    Cristalizado de mármol en Marbella con precios claros por metro cuadrado. Le asesoramos
+                    sobre el mejor tratamiento para su tipo de suelo.
+                  </div>
+                  <img class="service-photo" src="img/marble-crystallization-1.jpg" alt="Cristalizado de mármol en Marbella" />
+                </div>
+              </article>
+
+              <article class="service-card">
+                <div class="service-inner">
+                  <div class="service-pill"><span class="service-pill-dot"></span> empresa suelos</div>
+                  <div class="service-text-title">10) empresa de pulido de suelos Costa del Sol</div>
+                  <div class="service-text-desc">
+                    Empresa de <strong>pulido de suelos</strong> en toda la Costa del Sol. Trabajamos con
+                    comunidades de propietarios, administradores de fincas y empresas de limpieza.
+                  </div>
+                  <img class="service-photo" src="img/floor-polishing-company-1.jpg" alt="Empresa de pulido de suelos en la Costa del Sol" />
+                </div>
+              </article>
+            </div>
+          </section>
+
+          <!-- English side -->
+          <section class="column">
+            <div class="lang-label">English</div>
+            <h2>Marble & stone floor polishing in Marbella</h2>
+            <p class="intro">
+              Professional <strong>marble and granite floor polishing, shining and crystallizing</strong>
+              in Marbella, Fuengirola and the whole Costa del Sol. We work in private homes, communities,
+              hotels, restaurants and commercial premises.
+            </p>
+
+            <div class="services-title">Main services</div>
+            <div class="services-grid">
+              <article class="service-card">
+                <div class="service-inner">
+                  <div class="service-pill"><span class="service-pill-dot"></span> marble · Marbella</div>
+                  <div class="service-text-title">Marble floor polishing – Marbella</div>
+                  <div class="service-text-desc">
+                    Deep polishing of marble floors in apartments and villas in Marbella. We remove scratches,
+                    stains and wear and bring back the original shine of your marble.
+                  </div>
+                  <img class="service-photo" src="img/marble-polishing-1.jpg" alt="Marble floor polishing in Marbella apartment" />
+                </div>
+              </article>
+
+              <article class="service-card">
+                <div class="service-inner">
+                  <div class="service-pill"><span class="service-pill-dot"></span> shine & gloss</div>
+                  <div class="service-text-title">Polishing & shining of stone floors</div>
+                  <div class="service-text-desc">
+                    Complete <strong>polishing and shining</strong> service for marble and natural stone floors.
+                    Perfect for communities, entrances, garages and shops.
+                  </div>
+                  <img class="service-photo" src="img/marble-polishing-2.jpg" alt="Stone floor polishing and shining" />
+                </div>
+              </article>
+
+              <article class="service-card">
+                <div class="service-inner">
+                  <div class="service-pill"><span class="service-pill-dot"></span> Fuengirola</div>
+                  <div class="service-text-title">Marble polishing company – Fuengirola</div>
+                  <div class="service-text-desc">
+                    Local company focused on marble polishing in Fuengirola and nearby areas. Free, no-obligation
+                    quotes on site.
+                  </div>
+                  <img class="service-photo" src="img/marble-polishing-3.jpg" alt="Marble polishing company in Fuengirola" />
+                </div>
+              </article>
+
+              <article class="service-card">
+                <div class="service-inner">
+                  <div class="service-pill"><span class="service-pill-dot"></span> Costa del Sol</div>
+                  <div class="service-text-title">Marble polishing – Costa del Sol</div>
+                  <div class="service-text-desc">
+                    Marble floor polishing and restoration along the Costa del Sol: Marbella, Fuengirola,
+                    Estepona, Benalmádena and more.
+                  </div>
+                  <img class="service-photo" src="img/marble-polishing-4.jpg" alt="Marble floor polishing on the Costa del Sol" />
+                </div>
+              </article>
+
+              <article class="service-card">
+                <div class="service-inner">
+                  <div class="service-pill"><span class="service-pill-dot"></span> granite floors</div>
+                  <div class="service-text-title">Granite floor shining – Marbella</div>
+                  <div class="service-text-desc">
+                    Special treatments for granite floors: deep cleaning, polishing and long-lasting shine,
+                    with optional anti-slip finish.
+                  </div>
+                  <img class="service-photo" src="img/granite-polishing-1.jpg" alt="Granite floor shining in Marbella" />
+                </div>
+              </article>
+
+              <article class="service-card">
+                <div class="service-inner">
+                  <div class="service-pill"><span class="service-pill-dot"></span> commercial</div>
+                  <div class="service-text-title">Marble floor polishing for large areas</div>
+                  <div class="service-text-desc">
+                    Polishing of large marble surfaces in hotels, spas, shops and residential buildings. We can
+                    work outside business hours when needed.
+                  </div>
+                  <img class="service-photo" src="img/marble-hotel-lobby-1.jpg" alt="Hotel lobby with polished marble floor" />
+                </div>
+              </article>
+
+              <article class="service-card">
+                <div class="service-inner">
+                  <div class="service-pill"><span class="service-pill-dot"></span> restoration</div>
+                  <div class="service-text-title">Marble & granite restoration – Fuengirola</div>
+                  <div class="service-text-desc">
+                    Full restoration of old marble and granite floors: levelling, polishing, joint repair and
+                    final crystallization for a mirror-like finish.
+                  </div>
+                  <img class="service-photo" src="img/marble-restoration-1.jpg" alt="Marble and granite restoration in Fuengirola" />
+                </div>
+              </article>
+
+              <article class="service-card">
+                <div class="service-inner">
+                  <div class="service-pill"><span class="service-pill-dot"></span> near Marbella</div>
+                  <div class="service-text-title">Marble polishers near Marbella</div>
+                  <div class="service-text-desc">
+                    Local team of <strong>marble polishers near Marbella</strong>. Fast response, reliable
+                    service and professional results.
+                  </div>
+                  <img class="service-photo" src="img/marble-team-1.jpg" alt="Marble polishers near Marbella" />
+                </div>
+              </article>
+
+              <article class="service-card">
+                <div class="service-inner">
+                  <div class="service-pill"><span class="service-pill-dot"></span> prices</div>
+                  <div class="service-text-title">Marble crystallization – Marbella prices</div>
+                  <div class="service-text-desc">
+                    Marble crystallization in Marbella with clear prices per square metre. We advise you on
+                    the best treatment for your floor.
+                  </div>
+                  <img class="service-photo" src="img/marble-crystallization-1.jpg" alt="Marble crystallization prices in Marbella" />
+                </div>
+              </article>
+
+              <article class="service-card">
+                <div class="service-inner">
+                  <div class="service-pill"><span class="service-pill-dot"></span> floor company</div>
+                  <div class="service-text-title">Floor polishing company – Costa del Sol</div>
+                  <div class="service-text-desc">
+                    Professional <strong>floor polishing company</strong> covering the Costa del Sol. We work
+                    with communities, property managers and cleaning companies.
+                  </div>
+                  <img class="service-photo" src="img/floor-polishing-company-1.jpg" alt="Floor polishing company on the Costa del Sol" />
+                </div>
+              </article>
+            </div>
+          </section>
+        </div>
+
+        <section class="gallery">
+          <h3 class="gallery-title">Galería · Últimos trabajos</h3>
+          <div class="gallery-grid">
+            <article class="gallery-item">
+              <div class="gallery-photo-wrapper">
+                <img class="gallery-photo" src="img/marble-gallery-1.jpg" alt="Pulido de salón de mármol en Marbella" />
+                <div class="gallery-photo-overlay"></div>
+              </div>
+              <div class="gallery-caption">Pulido de suelo de mármol en salón de vivienda de lujo en Marbella.</div>
+            </article>
+            <article class="gallery-item">
+              <div class="gallery-photo-wrapper">
+                <img class="gallery-photo" src="img/marble-gallery-2.jpg" alt="Restauración de portal de granito" />
+                <div class="gallery-photo-overlay"></div>
+              </div>
+              <div class="gallery-caption">Restauración completa de suelo de granito en portal de comunidad.</div>
+            </article>
+            <article class="gallery-item">
+              <div class="gallery-photo-wrapper">
+                <img class="gallery-photo" src="img/marble-gallery-3.jpg" alt="Cristalizado de mármol en hotel" />
+                <div class="gallery-photo-overlay"></div>
+              </div>
+              <div class="gallery-caption">Cristalizado de mármol con acabado espejo en hotel de la Costa del Sol.</div>
+            </article>
+          </div>
+        </section>
+      </div>
+
+      <footer>
+        <div class="area-label">Marbella · Fuengirola · Costa del Sol</div>
+        <div class="contacts">
+          <div class="contact-item">
+            <span class="icon">📍</span>
+            <span>Marbella</span>
+          </div>
+          <div class="contact-item">
+            <span class="icon">📞</span>
+            <a href="tel:+37256886788">+372 56886788</a>
+          </div>
+          <div class="contact-item">
+            <span class="icon">✉️</span>
+            <a href="mailto:tiopedro@gmail.com">tiopedro@gmail.com</a>
+          </div>
+        </div>
+      </footer>
+    </div>
+  </div>
+</body>
+</html>
