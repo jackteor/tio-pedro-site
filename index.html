@@ -15,14 +15,12 @@
       font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
       color: #111827;
       padding: 32px 16px;
-      /* общий фон – тёмный зал с отблесками */
       background-color: #020617;
       background-image:
         radial-gradient(circle at 0 0, #4b5563 0, transparent 55%),
         radial-gradient(circle at 100% 100%, #d4a15a33 0, transparent 60%);
     }
 
-    /* сетка из мраморных плиток */
     .page {
       max-width: 1180px;
       margin: 0 auto;
@@ -71,6 +69,19 @@
       background-size: cover;
       background-position: center;
       color: #f9fafb;
+    }
+
+    .logo-wrap {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .logo-img {
+      height: 80px;
+      width: auto;
+      display: block;
+      filter: drop-shadow(0 6px 14px rgba(0,0,0,0.7));
     }
 
     .logo {
@@ -192,7 +203,6 @@
       gap: 12px;
     }
 
-    /* плитка-услуга */
     .service-card {
       border-radius: 16px;
       background-image:
@@ -273,7 +283,6 @@
       box-shadow: 0 10px 18px rgba(15, 23, 42, 0.45);
     }
 
-    /* галерея */
     .gallery {
       margin-top: 18px;
       padding: 14px 14px 8px;
@@ -447,9 +456,12 @@
   <div class="page">
     <div class="page-inner">
       <header class="hero">
-        <div>
-          <div class="logo"><span>Tio</span> Pedro</div>
-          <div class="hero-subtitle">Marble & stone floor care – Costa del Sol</div>
+        <div class="logo-wrap">
+          <img src="img/tio-pedro-logo.png" alt="Tio Pedro logo" class="logo-img" />
+          <div>
+            <div class="logo"><span>Tio</span> Pedro</div>
+            <div class="hero-subtitle">Marble & stone floor care – Costa del Sol</div>
+          </div>
         </div>
         <div class="tagline">
           <strong>Pulido premium</strong> de suelos de mármol y granito<br />
@@ -577,7 +589,7 @@
                   <div class="service-text-title">9) cristalizado de mármol Marbella precios</div>
                   <div class="service-text-desc">
                     Cristalizado de mármol en Marbella con precios claros por metro cuadrado. Le asesoramos
-                    sobre el mejor tratamiento para su tipo de suelo.
+                    sobre el mejor tratamiento для su tipo de suelo.
                   </div>
                   <img class="service-photo" src="img/marble-crystallization-1.jpg" alt="Cristalizado de mármol en Marbella" />
                 </div>
@@ -774,6 +786,10 @@
           <div class="contact-item">
             <span class="icon">✉️</span>
             <a href="mailto:tiopedro@gmail.com">tiopedro@gmail.com</a>
+          </div>
+          <div class="contact-item">
+            <span class="icon">💬</span>
+            <a href="https://wa.me/37256886788" target="_blank">WhatsApp</a>
           </div>
         </div>
       </footer>
