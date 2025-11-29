@@ -61,7 +61,7 @@
       padding: 24px 26px 70px;
       display: flex;
       justify-content: space-between;
-      align-items: flex-start;
+      align-items: center; /* центрируем по вертикали */
       gap: 16px;
       background-image:
         linear-gradient(120deg, rgba(15, 23, 42, 0.96), rgba(15, 23, 42, 0.82)),
@@ -109,15 +109,15 @@
     .hero-contacts-top {
       font-size: 20px;
       display: flex;
-      gap: 12px;
+      gap: 10px;
       align-items: center;
-      font-weight: 700;
+      font-weight: 600;
     }
 
     .hero-contacts-links {
       font-size: 16px;
       display: flex;
-      gap: 14px;
+      gap: 12px;
       margin-top: 6px;
       font-weight: 500;
       flex-wrap: wrap;
@@ -125,40 +125,29 @@
     }
 
     .hero-contacts-icon {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .hero-contacts-icon svg {
-      width: 32px;
-      height: 32px;
-      flex-shrink: 0;
+      font-size: 18px;
     }
 
     .hero-subtitle {
       margin-top: 6px;
-      font-size: 13px;
+      font-size: 18px;
       text-transform: uppercase;
       letter-spacing: 0.22em;
       color: #e5e7eb;
       opacity: 0.9;
-    }
-    .custom-title-centered {
-      font-weight: 700 !important;
-      font-size: 20px !important;
-      text-align: center !important;
-      width: 100%;
-      display: block;
-      margin-top: 10px;
+      text-align: center; /* по центру */
     }
 
+    .costa-highlight {
+      color: #facc6b;
+    }
 
     .tagline {
-      font-size: 13px;
+      font-size: 14px;
       color: #e5e7eb;
       line-height: 1.6;
       margin-top: 8px;
+      text-align: center; /* по центру */
     }
 
     .tagline strong {
@@ -416,15 +405,7 @@
     }
 
     .contact-item span.icon {
-      font-size: 16px;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .contact-item span.icon svg {
-      width: 22px;
-      height: 22px;
+      font-size: 14px;
     }
 
     .contact-item a {
@@ -467,7 +448,7 @@
       }
 
       .logo-img {
-        height: 140px;
+        height: 130px;
       }
     }
 
@@ -516,8 +497,8 @@
         <div class="logo-wrap">
           <img src="img/tio-pedro-logo.png" alt="Tio Pedro logo" class="logo-img" />
           <div>
-            <div class="hero-subtitle custom-title-centered">
-              <strong>Marble & stone floor care – Costa del Sol</strong>
+            <div class="hero-subtitle">
+              Marble & stone floor care – <span class="costa-highlight">Costa del Sol</span>
             </div>
             <div class="tagline">
               <strong>Pulido premium</strong> de suelos de mármol y granito<br />
@@ -528,42 +509,20 @@
         <div class="hero-contacts">
           <div class="hero-contacts-row">
             <div class="hero-contacts-top">
-              <span class="hero-contacts-icon">
-                <!-- Phone icon (gold) -->
-                <svg viewBox="0 0 24 24">
-                  <path fill="#facc6b" d="M6.6 10.8c1.1 2.1 2.9 3.9 5 5l1.7-1.7c.3-.3.8-.4 1.2-.2 1 .4 2.1.6 3.3.6.7 0 1.2.5 1.2 1.2V21c0 .7-.5 1.2-1.2 1.2-9.1 0-16.5-7.4-16.5-16.5C1.3 5 1.8 4.5 2.5 4.5H6c.7 0 1.2.5 1.2 1.2 0 1.2.2 2.3.6 3.3.1.4 0 .9-.2 1.2l-1.7 1.6z"/>
-                </svg>
-              </span>
+              <span class="hero-contacts-icon">📞</span>
               <a href="tel:+37256886788">+372 56886788</a>
             </div>
             <div class="hero-contacts-top">
-              <span class="hero-contacts-icon">
-                <!-- Email icon -->
-                <svg viewBox="0 0 24 24">
-                  <path fill="#facc6b" d="M2 4h20v16H2V4zm2 2v12h16V6H4zm8 6l8-6H4l8 6zm-8 6V8l8 6 8-6v10H4z"/>
-                </svg>
-              </span>
+              <span class="hero-contacts-icon">✉️</span>
               <a href="mailto:tiopedro@gmail.com">tiopedro@gmail.com</a>
             </div>
             <div class="hero-contacts-links">
               <span>
-                <span class="hero-contacts-icon">
-                  <!-- WhatsApp icon -->
-                  <svg viewBox="0 0 32 32">
-                    <path fill="#25D366" d="M16 3C9.4 3 4 8.4 4 15c0 2.6.9 5 2.4 7L4 29l7.2-2.3c1.9 1 4 1.5 6.1 1.5 6.6 0 12-5.4 12-12S22.6 3 16 3z"/>
-                    <path fill="#FFF" d="M23.3 19.4c-.4-.2-2.4-1.2-2.8-1.3-.4-.1-.7-.2-1 .2-.3.5-1.1 1.3-1.4 1.6-.2.2-.4.3-.8.1-2.2-1.1-3.7-2.9-4.7-4.4-.2-.3 0-.5.2-.7.2-.2.4-.4.6-.6.2-.2.3-.4.5-.6.2-.2.2-.5.1-.7-.1-.2-1-2.4-1.4-3.3-.3-.8-.6-.7-1-.7h-.8c-.3 0-.7.1-1 .5-.3.4-1.3 1.2-1.3 3s1.3 3.5 1.5 3.8c.2.3 2.6 4.1 6.3 5.8 3.7 1.7 3.7 1.2 4.4 1.1.7-.1 2.2-.9 2.5-1.8.3-.9.3-1.7.2-1.9-.1-.2-.4-.3-.8-.5z"/>
-                  </svg>
-                </span>
+                <span class="hero-contacts-icon">💬</span>
                 <a href="https://wa.me/37256886788" target="_blank" rel="noopener">WhatsApp: +372 56886788</a>
               </span>
               <span>
-                <span class="hero-contacts-icon">
-                  <!-- Telegram icon -->
-                  <svg viewBox="0 0 240 240">
-                    <circle cx="120" cy="120" r="120" fill="#26A5E4"/>
-                    <path d="M179 71L52 120l40 15 15 48 23-28 40 30 9-114z" fill="#fff"/>
-                  </svg>
-                </span>
+                <span class="hero-contacts-icon">📨</span>
                 <a href="https://t.me/" target="_blank" rel="noopener">Telegram: +372 56886788</a>
               </span>
             </div>
@@ -577,7 +536,7 @@
 
       <div class="two-columns-wrapper">
         <div class="two-columns">
-          <!-- Spanish column -->
+          <!-- Левая колонка: испанский -->
           <section class="column">
             <div class="lang-label">Español</div>
             <h2>Pulido y abrillantado de mármol en Marbella</h2>
@@ -631,7 +590,7 @@
                   <div class="service-text-title">4) pulir mármol Costa del Sol</div>
                   <div class="service-text-desc">
                     Pulimos y restauramos suelos de mármol en toda la Costa del Sol: Marbella, Fuengirola,
-                    Estepona, Benalmádena y alrededores.
+                    Estepona, Benalmádena и alrededores.
                   </div>
                   <img class="service-photo" src="img/marble-polishing-4.jpg" alt="Pulido de suelos de mármol en la Costa del Sol" />
                 </div>
@@ -711,7 +670,7 @@
             </div>
           </section>
 
-          <!-- English column -->
+          <!-- Правая колонка: английский -->
           <section class="column">
             <div class="lang-label">English</div>
             <h2>Marble & stone floor polishing in Marbella</h2>
@@ -881,46 +840,20 @@
             <span class="icon">📍</span>
             <span>Marbella</span>
           </div>
-
           <div class="contact-item">
-            <span class="icon">
-              <!-- Phone SVG -->
-              <svg viewBox="0 0 24 24">
-                <path fill="#facc6b" d="M6.6 10.8c1.1 2.1 2.9 3.9 5 5l1.7-1.7c.3-.3.8-.4 1.2-.2 1 .4 2.1.6 3.3.6.7 0 1.2.5 1.2 1.2V21c0 .7-.5 1.2-1.2 1.2-9.1 0-16.5-7.4-16.5-16.5C1.3 5 1.8 4.5 2.5 4.5H6c.7 0 1.2.5 1.2 1.2 0 1.2.2 2.3.6 3.3.1.4 0 .9-.2 1.2l-1.7 1.6z"/>
-              </svg>
-            </span>
+            <span class="icon">📞</span>
             <a href="tel:+37256886788">+372 56886788</a>
           </div>
-
           <div class="contact-item">
-            <span class="icon">
-              <!-- Email SVG -->
-              <svg viewBox="0 0 24 24">
-                <path fill="#facc6b" d="M2 4h20v16H2V4zm2 2v12h16V6H4zm8 6l8-6H4l8 6zm-8 6V8l8 6 8-6v10H4z"/>
-              </svg>
-            </span>
+            <span class="icon">✉️</span>
             <a href="mailto:tiopedro@gmail.com">tiopedro@gmail.com</a>
           </div>
-
           <div class="contact-item">
-            <span class="icon">
-              <!-- WhatsApp SVG -->
-              <svg viewBox="0 0 32 32">
-                <path fill="#25D366" d="M16 3C9.4 3 4 8.4 4 15c0 2.6.9 5 2.4 7L4 29l7.2-2.3c1.9 1 4 1.5 6.1 1.5 6.6 0 12-5.4 12-12S22.6 3 16 3z"/>
-                <path fill="#FFF" d="M23.3 19.4c-.4-.2-2.4-1.2-2.8-1.3-.4-.1-.7-.2-1 .2-.3.5-1.1 1.3-1.4 1.6-.2.2-.4.3-.8.1-2.2-1.1-3.7-2.9-4.7-4.4-.2-.3 0-.5.2-.7.2-.2.4-.4.6-.6.2-.2.3-.4.5-.6.2-.2.2-.5.1-.7-.1-.2-1-2.4-1.4-3.3-.3-.8-.6-.7-1-.7h-.8c-.3 0-.7.1-1 .5-.3.4-1.3 1.2-1.3 3s1.3 3.5 1.5 3.8c.2.3 2.6 4.1 6.3 5.8 3.7 1.7 3.7 1.2 4.4 1.1.7-.1 2.2-.9 2.5-1.8.3-.9.3-1.7.2-1.9-.1-.2-.4-.3-.8-.5z"/>
-              </svg>
-            </span>
+            <span class="icon">💬</span>
             <a href="https://wa.me/37256886788" target="_blank" rel="noopener">WhatsApp</a>
           </div>
-
           <div class="contact-item">
-            <span class="icon">
-              <!-- Telegram SVG -->
-              <svg viewBox="0 0 240 240">
-                <circle cx="120" cy="120" r="120" fill="#26A5E4"/>
-                <path d="M179 71L52 120l40 15 15 48 23-28 40 30 9-114z" fill="#fff"/>
-              </svg>
-            </span>
+            <span class="icon">📨</span>
             <a href="https://t.me/" target="_blank" rel="noopener">Telegram</a>
           </div>
         </div>
