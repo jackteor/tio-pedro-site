@@ -58,10 +58,10 @@
 
     header.hero {
       position: relative;
-      padding: 24px 26px 70px;
+      padding: 20px 26px 70px;
       display: flex;
       justify-content: space-between;
-      align-items: center; /* центрируем по вертикали */
+      align-items: flex-start;
       gap: 16px;
       background-image:
         linear-gradient(120deg, rgba(15, 23, 42, 0.96), rgba(15, 23, 42, 0.82)),
@@ -69,6 +69,12 @@
       background-size: cover;
       background-position: center;
       color: #f9fafb;
+    }
+
+    .hero-left {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
     }
 
     .logo-wrap {
@@ -84,9 +90,40 @@
       filter: drop-shadow(0 8px 22px rgba(0,0,0,0.9));
     }
 
+    .hero-title-block {
+      flex: 1;
+      text-align: center;
+      margin-top: 4px; /* ближе к верху */
+    }
+
+    .hero-title {
+      font-size: 22px;
+      font-weight: 800;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      margin: 0 0 6px;
+    }
+
+    .hero-title span.costa-highlight {
+      color: #facc6b;
+    }
+
+    .tagline {
+      font-size: 14px;
+      color: #e5e7eb;
+      line-height: 1.6;
+      margin: 0;
+      text-align: center;
+    }
+
+    .tagline strong {
+      color: #facc6b;
+      font-weight: 600;
+    }
+
     .hero-contacts {
       text-align: right;
-      font-size: 20px;
+      font-size: 18px;
       line-height: 1.6;
     }
 
@@ -103,56 +140,60 @@
       display: flex;
       flex-direction: column;
       align-items: flex-end;
-      gap: 4px;
+      gap: 6px;
     }
 
     .hero-contacts-top {
-      font-size: 20px;
       display: flex;
-      gap: 10px;
       align-items: center;
+      gap: 10px;
       font-weight: 600;
     }
 
-    .hero-contacts-links {
+    .contact-icon-circle {
+      width: 26px;
+      height: 26px;
+      border-radius: 999px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
       font-size: 16px;
-      display: flex;
-      gap: 12px;
-      margin-top: 6px;
-      font-weight: 500;
-      flex-wrap: wrap;
-      justify-content: flex-end;
+      color: #ffffff;
     }
 
-    .hero-contacts-icon {
-      font-size: 18px;
+    .icon-phone {
+      background: #f97316;
     }
 
-    .hero-subtitle {
-      margin-top: 6px;
-      font-size: 18px;
-      text-transform: uppercase;
-      letter-spacing: 0.22em;
-      color: #e5e7eb;
-      opacity: 0.9;
-      text-align: center; /* по центру */
-    }
-
-    .costa-highlight {
-      color: #facc6b;
-    }
-
-    .tagline {
+    .icon-gmail {
+      background: #ea4335;
+      font-weight: 700;
       font-size: 14px;
-      color: #e5e7eb;
-      line-height: 1.6;
-      margin-top: 8px;
-      text-align: center; /* по центру */
     }
 
-    .tagline strong {
-      color: #facc6b;
-      font-weight: 600;
+    .messenger-row {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      margin-top: 4px;
+      font-size: 15px;
+    }
+
+    .messenger-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: 500;
+    }
+
+    .icon-whatsapp {
+      background: #25d366;
+      font-size: 17px;
+    }
+
+    .icon-telegram {
+      background: #229ed9;
+      font-size: 18px;
     }
 
     .badge {
@@ -425,14 +466,22 @@
     }
 
     @media (max-width: 900px) {
-      .two-columns {
-        grid-template-columns: 1fr;
-      }
-
       header.hero {
         flex-direction: column;
         align-items: flex-start;
         padding-bottom: 60px;
+      }
+
+      .hero-left {
+        width: 100%;
+      }
+
+      .hero-title-block {
+        margin-top: 8px;
+      }
+
+      .two-columns {
+        grid-template-columns: 1fr;
       }
 
       .two-columns-wrapper {
@@ -494,40 +543,44 @@
   <div class="page">
     <div class="page-inner">
       <header class="hero">
-        <div class="logo-wrap">
+        <div class="hero-left">
           <img src="img/tio-pedro-logo.png" alt="Tio Pedro logo" class="logo-img" />
-          <div>
-            <div class="hero-subtitle">
-              Marble & stone floor care – <span class="costa-highlight">Costa del Sol</span>
-            </div>
-            <div class="tagline">
-              <strong>Pulido premium</strong> de suelos de mármol y granito<br />
-              para viviendas, comunidades y hoteles en Marbella y Fuengirola.
-            </div>
-          </div>
         </div>
+
+        <div class="hero-title-block">
+          <h1 class="hero-title">
+            MARBLE & STONE FLOOR CARE –
+            <span class="costa-highlight">COSTA DEL SOL</span>
+          </h1>
+          <p class="tagline">
+            <strong>Pulido premium</strong> de suelos de mármol y granito<br />
+            para viviendas, comunidades y hoteles en Marbella y Fuengirola.
+          </p>
+        </div>
+
         <div class="hero-contacts">
           <div class="hero-contacts-row">
             <div class="hero-contacts-top">
-              <span class="hero-contacts-icon">📞</span>
+              <span class="contact-icon-circle icon-phone">📞</span>
               <a href="tel:+37256886788">+372 56886788</a>
             </div>
             <div class="hero-contacts-top">
-              <span class="hero-contacts-icon">✉️</span>
+              <span class="contact-icon-circle icon-gmail">M</span>
               <a href="mailto:tiopedro@gmail.com">tiopedro@gmail.com</a>
             </div>
-            <div class="hero-contacts-links">
-              <span>
-                <span class="hero-contacts-icon">💬</span>
-                <a href="https://wa.me/37256886788" target="_blank" rel="noopener">WhatsApp: +372 56886788</a>
-              </span>
-              <span>
-                <span class="hero-contacts-icon">📨</span>
-                <a href="https://t.me/" target="_blank" rel="noopener">Telegram: +372 56886788</a>
-              </span>
+            <div class="messenger-row">
+              <a class="messenger-link" href="https://wa.me/37256886788" target="_blank" rel="noopener">
+                <span class="contact-icon-circle icon-whatsapp">🗨</span>
+                WhatsApp: +372 56886788
+              </a>
+              <a class="messenger-link" href="https://t.me/" target="_blank" rel="noopener">
+                <span class="contact-icon-circle icon-telegram">✈</span>
+                Telegram: +372 56886788
+              </a>
             </div>
           </div>
         </div>
+
         <div class="badge">
           <span class="badge-dot"></span>
           <span>Desde Marbella · Servicio local</span>
@@ -590,7 +643,7 @@
                   <div class="service-text-title">4) pulir mármol Costa del Sol</div>
                   <div class="service-text-desc">
                     Pulimos y restauramos suelos de mármol en toda la Costa del Sol: Marbella, Fuengirola,
-                    Estepona, Benalmádena и alrededores.
+                    Estepona, Benalmádena y alrededores.
                   </div>
                   <img class="service-photo" src="img/marble-polishing-4.jpg" alt="Pulido de suelos de mármol en la Costa del Sol" />
                 </div>
